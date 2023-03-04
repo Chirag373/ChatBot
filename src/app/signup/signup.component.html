@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Register</h1>
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="fullName" class="form-control" [(ngModel)]="fullName" #fullNameInput="ngModel" required>
+        <div *ngIf="fullNameInput.invalid && (fullNameInput.dirty || fullNameInput.touched)">
+          <div *ngIf="fullNameInput.errors?.['required']" style="color: tomato;">Full Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" [(ngModel)]="email" #emailInput="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+          <div *ngIf="emailInput.errors?.['required']" style="color: tomato;">Email is required</div>
+          <div *ngIf="emailInput.errors?.['pattern']" style="color: tomato;">Email must be valid</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" [(ngModel)]="password" #passwordInput="ngModel" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{1,6}">
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+          <div *ngIf="passwordInput.errors?.['required']" style="color: tomato;">Password is required</div>
+          <div *ngIf="passwordInput.errors?.['pattern']" style="color: tomato;">Password must be between 1 to 6 characters, contain at least one uppercase letter, one lowercase letter, one number and one special character</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="signupForm.invalid">Signup</button>
+    </form>
+  </div>
+  

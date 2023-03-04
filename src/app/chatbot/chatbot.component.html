@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 style="color: slategrey;">Blinking Bed</h2>
+  <div class="chatbox" #chatbox>
+    <div *ngFor="let message of messages" class="message"
+      [ngClass]="{ 'user-message': message.sender === 'You', 'bot-message': message.sender === 'Bot' }">
+      <div class="message-wrapper">
+        <span class="message-sender">{{ message.sender }}</span>
+        <span class="message-text">{{ message.text }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Type your question here" [(ngModel)]="question"
+      (keydown.enter)="sendQuestion()" />
+    <button class="btn btn-primary" (click)="sendQuestion()">Send</button>
+  </div>
+</div>
